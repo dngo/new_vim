@@ -21,6 +21,7 @@ augroup END
 au BufRead sup.*        set ft=mail
 
 autocmd BufNewFile,BufRead *.yml set ft=ruby fenc=utf-8
+autocmd BufWritePre *.rb :%s/\s\+$//e
 :command -bar -nargs=1 OpenURL :!open  
 
 set nobackup
@@ -52,7 +53,7 @@ set statusline=%F[%p%%]
 map rr :%s///gc 
 map rt :call RunTest('')<RETURN>
 
-let g:CommandTMaxFiles=10000
+let g:CommandTMaxFiles=20000
 "open up command t when pressing tab
 map <TAB> <ESC>:CommandT<RETURN>
 
