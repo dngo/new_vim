@@ -21,7 +21,18 @@ augroup END
 au BufRead sup.*        set ft=mail
 
 autocmd BufNewFile,BufRead *.yml set ft=ruby fenc=utf-8
-autocmd BufWritePre *.rb :%s/\s\+$//e
+autocmd BufWritePre *.rb call TrimWhiteSpace()
+autocmd BufWritePre *.haml call TrimWhiteSpace()
+autocmd BufWritePre *.yml call TrimWhiteSpace()
+autocmd BufWritePre *.css call TrimWhiteSpace()
+autocmd BufWritePre *.js call TrimWhiteSpace()
+
+" Removes trailing spaces
+function TrimWhiteSpace()
+  %s/\s\+$//e
+  ''
+endfunction
+
 :command -bar -nargs=1 OpenURL :!open  
 
 set nobackup
