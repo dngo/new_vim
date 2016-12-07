@@ -30,7 +30,6 @@ autocmd BufWritePre *.js call TrimWhiteSpace()
 " Removes trailing spaces
 function TrimWhiteSpace()
   %s/\s\+$//e
-  ''
 endfunction
 
 :command -bar -nargs=1 OpenURL :!open  
