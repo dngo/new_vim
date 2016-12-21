@@ -63,9 +63,8 @@ set statusline=%F[%p%%]
 map rr :%s///gc 
 map rt :call RunTest('')<RETURN>
 
-let g:CommandTMaxFiles=20000
-"open up command t when pressing tab
-map <TAB> <ESC>:CommandT<RETURN>
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+map <TAB> <ESC>:CtrlP<RETURN>
 
 "open up nerd tree when pressing tab twice
 map <TAB><TAB> <ESC>:NERDTreeToggle<RETURN> 
