@@ -38,11 +38,11 @@ set nobackup
 set noswapfile
 set nowritebackup
 
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
-let g:proj_flags="imsgtv"
+"let g:miniBufExplMapWindowNavVim = 1
+"let g:miniBufExplMapWindowNavArrows = 1
+"let g:miniBufExplMapCTabSwitchBufs = 1
+"let g:miniBufExplModSelTarget = 1
+"let g:proj_flags="imsgtv"
 
 colorscheme vividchalk
 set background=dark
@@ -52,16 +52,16 @@ hi MBEVisibleNormal guibg=green ctermbg=green
 hi MBEChanged guibg=red ctermbg=red
 hi MBEVisibleChanged guibg=yellow ctermbg=yellow
 
-if has("gui_macvim")
+"if has("gui_macvim")
   "Fullscreen MacVim
-  set fuopt=maxhorz,maxvert
-endif
+"  set fuopt=maxhorz,maxvert
+"endif
 
 
-"set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
-set statusline=%F[%p%%]
+set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
+"set statusline=%F[%p%%]
 map rr :%s///gc 
-map rt :call RunTest('')<RETURN>
+"map rt :call RunTest('')<RETURN>
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 map <TAB> <ESC>:CtrlP<RETURN>
@@ -69,8 +69,8 @@ map <TAB> <ESC>:CtrlP<RETURN>
 "open up nerd tree when pressing tab twice
 map <TAB><TAB> <ESC>:NERDTreeToggle<RETURN> 
 
-
-map <S-U> <ESC>:red<RETURN>
+"redo latest changes to file
+map <S-U> <ESC>:red<RETURN> 
 
 "alt-left changes to previous buffer and saves file
 map <S-Left> <ESC>:w<RETURN><ESC>:bp<RETURN> 
@@ -87,7 +87,7 @@ let NERDTreeQuitOnOpen=1          " Quit on opening files from the tree
 let NERDTreeHighlightCursorline=1 " Highlight the selected entry in the tree
 let NERDTreeMouseMode=2           " Use a single click to fold/unfold directories
                                   " and a double click to open files
-let g:EasyMotion_leader_key = '<SPACE>' 
+"let g:EasyMotion_leader_key = '<SPACE>' 
 
 " strips off two full keystrokes from almost every Vim command since I dont have to press shift
 nnoremap ; :
