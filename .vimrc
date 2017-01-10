@@ -26,6 +26,7 @@ autocmd BufWritePre *.haml call TrimWhiteSpace()
 autocmd BufWritePre *.yml call TrimWhiteSpace()
 autocmd BufWritePre *.css call TrimWhiteSpace()
 autocmd BufWritePre *.js call TrimWhiteSpace()
+autocmd CursorHold,CursorHoldI * update   "autosave
 
 " Removes trailing spaces
 function TrimWhiteSpace()
@@ -57,8 +58,7 @@ hi MBEVisibleChanged guibg=yellow ctermbg=yellow
 "  set fuopt=maxhorz,maxvert
 "endif
 
-
-set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
+set statusline=%m%F%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 "set statusline=%F[%p%%]
 map rr :%s///gc 
 "map rt :call RunTest('')<RETURN>
