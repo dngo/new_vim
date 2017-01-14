@@ -38,6 +38,7 @@ endfunction
 set nobackup
 set noswapfile
 set nowritebackup
+set updatetime=250
 
 "let g:miniBufExplMapWindowNavVim = 1
 "let g:miniBufExplMapWindowNavArrows = 1
