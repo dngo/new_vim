@@ -81,6 +81,7 @@ map <TAB><TAB> <ESC>:NERDTreeToggle<RETURN>
 
 "redo latest changes to file
 map <S-U> <ESC>:red<RETURN> 
+map <S-C> <ESC>:bd<RETURN> 
 
 "alt-left changes to previous buffer and saves file
 map <S-Left> <ESC>:w<RETURN><ESC>:bp<RETURN> 
@@ -98,7 +99,7 @@ let NERDTreeQuitOnOpen=1          " Quit on opening files from the tree
 let NERDTreeHighlightCursorline=1 " Highlight the selected entry in the tree
 let NERDTreeMouseMode=2           " Use a single click to fold/unfold directories
                                   " and a double click to open files
-"let g:EasyMotion_leader_key = '<SPACE>' 
+
 
 " strips off two full keystrokes from almost every Vim command since I dont have to press shift
 nnoremap ; :
