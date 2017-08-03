@@ -1,3 +1,4 @@
+let mapleader = " "
 let maplocalleader=',' 
 set nocompatible
 set number
@@ -9,6 +10,9 @@ set hid
 set incsearch
 set sts=2
 set ignorecase  "case insensitive by default
+
+set ruler         " show the cursor position all the time
+
 
 
 runtime! macros/matchit.vim
@@ -87,6 +91,9 @@ map <S-C> <ESC>:bd<RETURN>
 map <S-Left> <ESC>:w<RETURN><ESC>:bp<RETURN> 
  "alt-right changes to next buffer and saves file
 map <S-Right> <ESC>:w<RETURN><ESC>:bn<RETURN> 
+
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>ss :call RunAllSpecs()<CR>
 
 set pastetoggle=<F2> "press F2 to toggle between :set paste and :set nopaste
 set bs=2
