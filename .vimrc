@@ -85,7 +85,6 @@ map <TAB><TAB> <ESC>:NERDTreeToggle<RETURN>
 
 "redo latest changes to file
 map <S-U> <ESC>:red<RETURN> 
-map <S-C> <ESC>:bd<RETURN> 
 
 "alt-left changes to previous buffer and saves file
 map <S-Left> <ESC>:w<RETURN><ESC>:bp<RETURN> 
@@ -94,6 +93,9 @@ map <S-Right> <ESC>:w<RETURN><ESC>:bn<RETURN>
 
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>ss :call RunAllSpecs()<CR>
+map a :Ack!
+map q <ESC>:bd<RETURN> 
+
 
 set pastetoggle=<F2> "press F2 to toggle between :set paste and :set nopaste
 set bs=2
