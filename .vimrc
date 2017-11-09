@@ -1,5 +1,5 @@
 let mapleader = " "
-let maplocalleader=',' 
+let maplocalleader=','
 set nocompatible
 set number
 execute pathogen#infect()
@@ -46,7 +46,7 @@ function TrimWhiteSpace()
   %s/\s\+$//e
 endfunction
 
-:command -bar -nargs=1 OpenURL :!open  
+:command -bar -nargs=1 OpenURL :!open
 
 set nobackup
 set noswapfile
@@ -74,27 +74,27 @@ hi MBEVisibleChanged guibg=yellow ctermbg=yellow
 
 set statusline=%m%F%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 "set statusline=%F[%p%%]
-map rr :%s///gc 
+map rr :%s///gc
 "map rt :call RunTest('')<RETURN>
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 map <TAB> <ESC>:CtrlP<RETURN>
 
 "open up nerd tree when pressing tab twice
-map <TAB><TAB> <ESC>:NERDTreeToggle<RETURN> 
+map <TAB><TAB> <ESC>:NERDTreeToggle<RETURN>
 
 "redo latest changes to file
-map <S-U> <ESC>:red<RETURN> 
+map <S-U> <ESC>:red<RETURN>
 
 "alt-left changes to previous buffer and saves file
-map <S-Left> <ESC>:w<RETURN><ESC>:bp<RETURN> 
+map <S-Left> <ESC>:w<RETURN><ESC>:bp<RETURN>
  "alt-right changes to next buffer and saves file
-map <S-Right> <ESC>:w<RETURN><ESC>:bn<RETURN> 
+map <S-Right> <ESC>:w<RETURN><ESC>:bn<RETURN>
 
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>ss :call RunAllSpecs()<CR>
 map a :Ack!
-map q <ESC>:bd<RETURN> 
+map q <ESC>:bd<RETURN>
 
 
 set pastetoggle=<F2> "press F2 to toggle between :set paste and :set nopaste
