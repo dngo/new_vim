@@ -51,7 +51,7 @@ endfunction
 set nobackup
 set noswapfile
 set nowritebackup
-set updatetime=250
+set updatetime=100
 
 "let g:miniBufExplMapWindowNavVim = 1
 "let g:miniBufExplMapWindowNavArrows = 1
@@ -92,7 +92,7 @@ map <S-Left> <ESC>:w<RETURN><ESC>:bp<RETURN>
 map <S-Right> <ESC>:w<RETURN><ESC>:bn<RETURN>
 
 map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>ss :call RunAllSpecs()<CR>
+map <Leader>ss :call RunCurrentSpecFile()<CR>
 map a :Ack!
 map q <ESC>:bd<RETURN>
 
