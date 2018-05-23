@@ -2,6 +2,36 @@ let mapleader = " "
 let maplocalleader=','
 set nocompatible
 set number
+
+"set the runtime path to include Vundle and initialize
+filetype off                  " required
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+"alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+"Plugin 'tpope/vim-rails'
+"Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'tpope/vim-surround'
+"Plugin 'tpope/vim-repeat'
+"Plugin 'tpope/vim-commentary'
+"Plugin 'thoughtbot/vim-rspec'
+"Plugin 'tpope/vim-dispatch'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+"Plugin 'kchmck/vim-coffee-script'
+"Plugin 'elixir-lang/vim-elixir'
+"Plugin 'flazz/vim-colorschemes'
+"Plugin 'airblade/vim-gitgutter'
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+
+
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
@@ -41,6 +71,8 @@ let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_min_syntax_length = 3
 " let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
+let g:javascript_plugin_flow = 1
+
 " Removes trailing spaces
 function TrimWhiteSpace()
   %s/\s\+$//e
@@ -51,7 +83,7 @@ endfunction
 set nobackup
 set noswapfile
 set nowritebackup
-set updatetime=100
+set updatetime=75
 
 "let g:miniBufExplMapWindowNavVim = 1
 "let g:miniBufExplMapWindowNavArrows = 1
@@ -74,8 +106,9 @@ hi MBEVisibleChanged guibg=yellow ctermbg=yellow
 
 set statusline=%m%F%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 "set statusline=%F[%p%%]
+
+"shortcut for find and replace
 map rr :%s///gc
-"map rt :call RunTest('')<RETURN>
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 map <TAB> <ESC>:CtrlPClearCache<CR><ESC>:CtrlP<RETURN>
@@ -94,6 +127,8 @@ map <S-Right> <ESC>:w<RETURN><ESC>:bn<RETURN>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>ss :call RunCurrentSpecFile()<CR>
 map a :Ack!
+
+"close the current buffer
 map q <ESC>:bd<RETURN>
 
 
