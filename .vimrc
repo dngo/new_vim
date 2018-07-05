@@ -21,6 +21,7 @@ Plugin 'VundleVim/Vundle.vim'
 "Plugin 'tpope/vim-commentary'
 "Plugin 'thoughtbot/vim-rspec'
 "Plugin 'tpope/vim-dispatch'
+Plugin 'jlanzarotta/bufexplorer'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
@@ -126,7 +127,7 @@ map <S-Right> <ESC>:w<RETURN><ESC>:bn<RETURN>
 
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>ss :call RunCurrentSpecFile()<CR>
-map a :Ack!
+map a :Ack! -i 
 
 "close the current buffer
 map q <ESC>:bd<RETURN>
