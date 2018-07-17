@@ -127,7 +127,7 @@ map <S-Right> <ESC>:w<RETURN><ESC>:bn<RETURN>
 
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>ss :call RunCurrentSpecFile()<CR>
-map a :Ack! -i 
+map a :Ack!
 
 "close the current buffer
 map q <ESC>:bd<RETURN>
