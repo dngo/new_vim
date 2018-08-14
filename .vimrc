@@ -130,8 +130,7 @@ map <Leader>ss :call RunCurrentSpecFile()<CR>
 map a :Ack!
 
 "close the current buffer
-map q <ESC>:bd<RETURN>
-
+map q :bp\|bd #<CR>
 
 set pastetoggle=<F2> "press F2 to toggle between :set paste and :set nopaste
 set bs=2
