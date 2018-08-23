@@ -123,8 +123,10 @@ map <S-U> <ESC>:red<RETURN>
 
 "alt-left changes to previous buffer and saves file
 map <S-Left> <ESC>:w<RETURN><ESC>:bp<RETURN>
+map <S-h> <ESC>:w<RETURN><ESC>:bp<RETURN>
  "alt-right changes to next buffer and saves file
 map <S-Right> <ESC>:w<RETURN><ESC>:bn<RETURN>
+map <S-e> <ESC>:w<RETURN><ESC>:bn<RETURN>
 
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>ss :call RunCurrentSpecFile()<CR>
@@ -144,6 +146,11 @@ map a :Ack!
 " inSert/Replace/append (T) {{{
 " nnoremap s i|
 " nnoremap S I|
+" }}}
+"
+" find/next/remap {{{
+ nnoremap k n|
+ nnoremap K N|
 " }}}
 "
 "Window handling {{{
