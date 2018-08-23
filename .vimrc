@@ -112,7 +112,8 @@ set statusline=%m%F%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 map rr :%s///gc
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
-map <TAB> <ESC>:CtrlPClearCache<CR><ESC>:CtrlP<RETURN>
+"map <TAB> <ESC>:CtrlPClearCache<CR><ESC>:CtrlP<RETURN>
+map <TAB> <ESC>:CtrlP<CR>
 
 "open up nerd tree when pressing tab twice
 map <TAB><TAB> <ESC>:NERDTreeToggle<RETURN>
@@ -128,6 +129,34 @@ map <S-Right> <ESC>:w<RETURN><ESC>:bn<RETURN>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>ss :call RunCurrentSpecFile()<CR>
 map a :Ack!
+
+" Up/down/left/right {{{
+ nnoremap h h|xnoremap h h|onoremap h h|
+ nnoremap l k|xnoremap l j|onoremap l k|
+ nnoremap n j|xnoremap n j|onoremap n j|
+ nnoremap e l|xnoremap e l|onoremap e l|
+" nnoremap h h|xnoremap h h|onoremap h h|
+" nnoremap n k|xnoremap n j|onoremap n k|
+" nnoremap e j|xnoremap e k|onoremap e j|
+" nnoremap i l|xnoremap i l|onoremap i l|
+" }}}
+
+" inSert/Replace/append (T) {{{
+" nnoremap s i|
+" nnoremap S I|
+" }}}
+"
+"Window handling {{{
+   nnoremap <C-h> <c-w>h
+   nnoremap <C-l> <c-w>k
+   nnoremap <C-n> <c-w>j
+   nnoremap <C-e> <c-w>l
+"  nnoremap <silent> <C-Left> <c-w>h
+"  nnoremap <silent> <C-Up> <c-w>k
+"  nnoremap <silent> <C-Down> <c-w>j
+"  nnoremap <silent> <C-Right> <c-w>l
+"}}}
+
 
 "close the current buffer
 map q :bp\|bd #<CR>
