@@ -119,28 +119,25 @@ map <TAB> <ESC>:CtrlP<CR>
 map <TAB><TAB> <ESC>:NERDTreeToggle<RETURN>
 
 "redo latest changes to file
-map <S-U> <ESC>:red<RETURN>
+  map <S-U> <ESC>:red<RETURN>
 
-"alt-left changes to previous buffer and saves file
-map <S-Left> <ESC>:w<RETURN><ESC>:bp<RETURN>
-map <S-h> <ESC>:w<RETURN><ESC>:bp<RETURN>
- "alt-right changes to next buffer and saves file
-map <S-Right> <ESC>:w<RETURN><ESC>:bn<RETURN>
-map <S-e> <ESC>:w<RETURN><ESC>:bn<RETURN>
+"shift-h or shift-left saves file and goes to next buffer
+  map <S-Left> :w\|bp<CR>
+  map <S-h> :w\|bp<CR>
+
+"shift-e or shift-right saves file and goes to next buffer
+  map <S-Right> :w\|bn<CR>
+  map <S-e> :w\|bn<CR>
 
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>ss :call RunCurrentSpecFile()<CR>
-map a :Ack!
+map f :Ack!
 
 " Up/down/left/right {{{
  nnoremap h h|xnoremap h h|onoremap h h|
- nnoremap l k|xnoremap l j|onoremap l k|
+ nnoremap l k|xnoremap l k|onoremap l k|
  nnoremap n j|xnoremap n j|onoremap n j|
  nnoremap e l|xnoremap e l|onoremap e l|
-" nnoremap h h|xnoremap h h|onoremap h h|
-" nnoremap n k|xnoremap n j|onoremap n k|
-" nnoremap e j|xnoremap e k|onoremap e j|
-" nnoremap i l|xnoremap i l|onoremap i l|
 " }}}
 
 " inSert/Replace/append (T) {{{
@@ -158,14 +155,20 @@ map a :Ack!
    nnoremap <C-l> <c-w>k
    nnoremap <C-n> <c-w>j
    nnoremap <C-e> <c-w>l
-"  nnoremap <silent> <C-Left> <c-w>h
-"  nnoremap <silent> <C-Up> <c-w>k
-"  nnoremap <silent> <C-Down> <c-w>j
-"  nnoremap <silent> <C-Right> <c-w>l
+   nnoremap <C-Left> <c-w>h
+   nnoremap <C-Up> <c-w>k
+   nnoremap <C-Down> <c-w>j
+   nnoremap <C-Right> <c-w>l
 "}}}
 
+"disable arrow keys
+"noremap <Up> <NOP>
+"noremap <Down> <NOP>
+"noremap <Left> <NOP>
+"noremap <Right> <NOP>
+"
 
-"close the current buffer
+"close the current buffer without closing window splits
 map q :bp\|bd #<CR>
 
 set pastetoggle=<F2> "press F2 to toggle between :set paste and :set nopaste
