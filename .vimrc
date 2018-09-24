@@ -25,8 +25,8 @@ Plugin 'jlanzarotta/bufexplorer'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'Valloric/YouCompleteMe'
 "Plugin 'kchmck/vim-coffee-script'
-"Plugin 'elixir-lang/vim-elixir'
 "Plugin 'flazz/vim-colorschemes'
 "Plugin 'airblade/vim-gitgutter'
 " All of your Plugins must be added before the following line
@@ -43,8 +43,10 @@ set sts=2
 set ignorecase  "case insensitive by default
 
 set ruler         " show the cursor position all the time
-
-
+set tabstop=2
+set shiftwidth=2
+set shiftround
+set expandtab
 
 runtime! macros/matchit.vim
 
@@ -60,17 +62,9 @@ autocmd BufWritePre *.rb call TrimWhiteSpace()
 autocmd BufWritePre *.haml call TrimWhiteSpace()
 autocmd BufWritePre *.yml call TrimWhiteSpace()
 autocmd BufWritePre *.css call TrimWhiteSpace()
+autocmd BufWritePre *.slim call TrimWhiteSpace()
 autocmd BufWritePre *.js call TrimWhiteSpace()
 autocmd CursorHold,CursorHoldI * update   "autosave
-
-let g:acp_enableAtStartup = 0
-" Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
-" " Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-" " Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
-" let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
 let g:javascript_plugin_flow = 1
 
@@ -84,13 +78,7 @@ endfunction
 set nobackup
 set noswapfile
 set nowritebackup
-set updatetime=75
-
-"let g:miniBufExplMapWindowNavVim = 1
-"let g:miniBufExplMapWindowNavArrows = 1
-"let g:miniBufExplMapCTabSwitchBufs = 1
-"let g:miniBufExplModSelTarget = 1
-"let g:proj_flags="imsgtv"
+set updatetime=77
 
 colorscheme vividchalk
 set background=dark
@@ -106,20 +94,18 @@ hi MBEVisibleChanged guibg=yellow ctermbg=yellow
 "endif
 
 set statusline=%m%F%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
-"set statusline=%F[%p%%]
 
 "shortcut for find and replace
 map rr :%s///gc
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
-"map <TAB> <ESC>:CtrlPClearCache<CR><ESC>:CtrlP<RETURN>
-map <TAB> <ESC>:CtrlP<CR>
+map <TAB> :CtrlP<CR>
 
 "open up nerd tree when pressing tab twice
-map <TAB><TAB> <ESC>:NERDTreeToggle<RETURN>
+map <TAB><TAB> :NERDTreeToggle<CR>
 
 "redo latest changes to file
-  map <S-U> <ESC>:red<RETURN>
+  map <S-U> :red<CR>
 
 "shift-h or shift-left saves file and goes to next buffer
   map <S-Left> :w\|bp<CR>
@@ -140,11 +126,6 @@ map f :Ack!
  nnoremap e l|xnoremap e l|onoremap e l|
 " }}}
 
-" inSert/Replace/append (T) {{{
-" nnoremap s i|
-" nnoremap S I|
-" }}}
-"
 " find/next/remap {{{
  nnoremap k n|
  nnoremap K N|
@@ -166,7 +147,7 @@ map f :Ack!
 "noremap <Down> <NOP>
 "noremap <Left> <NOP>
 "noremap <Right> <NOP>
-"
+
 
 "close the current buffer without closing window splits
 map q :bp\|bd #<CR>
