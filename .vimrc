@@ -36,11 +36,15 @@ call vundle#end()            " required
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
+set autoread  " reload files when changed on disk, i.e. via `git checkout`
+set backspace=2 " fix broken backspace in some setups
 set mouse=a
 set hid
 set incsearch
 set sts=2
 set ignorecase  "case insensitive by default
+"set cursorline " highlight current line
+
 
 set ruler         " show the cursor position all the time
 set tabstop=2
@@ -78,7 +82,7 @@ endfunction
 set nobackup
 set noswapfile
 set nowritebackup
-set updatetime=77
+set updatetime=10
 
 colorscheme vividchalk
 set background=dark
@@ -167,3 +171,8 @@ let NERDTreeMouseMode=2           " Use a single click to fold/unfold directorie
 
 " strips off two full keystrokes from almost every Vim command since I dont have to press shift
 nnoremap ; :
+
+
+" :%norm A ; "appends ; to the end of all lines
+" :%norm I , "prepends , to the end of all lines
+" i "opens in split while in nerdtree
