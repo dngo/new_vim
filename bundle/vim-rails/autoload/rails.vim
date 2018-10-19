@@ -763,12 +763,14 @@ function! s:buffer_number() dict abort
 endfunction
 
 function! s:buffer_path() dict abort
-  return s:gsub(fnamemodify(bufname(self.number()),':p'),'\\ @!','/')
+  let bufname = bufname(self.number())
+  return empty(bufname) ? '' : s:gsub(fnamemodify(bufname,':p'),'\\ @!','/')
 endfunction
 
 function! s:buffer_name() dict abort
   let app = self.app()
-  let f = fnamemodify(bufname(self.number()), ':p')
+  let bufname = bufname(self.number())
+  let f = len(bufname) ? fnamemodify(bufname, ':p') : ''
   if f !~# ':[\/][\/]'
     let f = resolve(f)
   endif
@@ -798,14 +800,8 @@ function! s:readable_calculate_file_type() dict abort
   endif
   let r = "-"
   let full_path = self.path()
-  let nr = bufnr('^'.full_path.'$')
-  if nr < 0 && exists('+shellslash') && ! &shellslash
-    let nr = bufnr('^'.s:gsub(full_path,'/','\\').'$')
-  endif
   if empty(f)
     let r = ""
-  elseif nr > 0 && !empty(getbufvar(nr, 'rails_file_type'))
-    return getbufvar(nr, 'rails_file_type')
   elseif f =~# '^app/controllers/concerns/.*\.rb$'
     let r = "controller-concern"
   elseif f =~# '_controller\.rb$' || f =~# '^app/controllers/.*\.rb$'
@@ -2544,7 +2540,7 @@ function! s:ruby_cfile() abort
       let res = s:glob(viewpath . view . '.html.*')
       if len(res)|return res[0]|endif
       let res = s:glob(viewpath . view . '.*')
-      if len(res)|return res|endif
+      if len(res)|return res[0]|endif
       return substitute(viewpath, '.*[\/]app[\/]views[\/]', '', '') . view . '.html'
     endif
   else
@@ -4320,10 +4316,6 @@ function! s:combine_projections(dest, src, ...) abort
 endfunction
 
 let s:default_projections = {
-      \  "*.example.yml": {"alternate": "{}.yml"},
-      \  "*.yml": {"alternate": ["{}.example.yml", "{}.yml.example", "{}.yml.sample"]},
-      \  "*.yml.example": {"alternate": "{}.yml"},
-      \  "*.yml.sample": {"alternate": "{}.yml"},
       \  "Gemfile": {"alternate": "Gemfile.lock", "type": "lib"},
       \  "Gemfile.lock": {"alternate": "Gemfile"},
       \  "README": {"alternate": "config/database.yml"},
@@ -4373,6 +4365,16 @@ let s:default_projections = {
       \    "template": ["class {camelcase|capitalize|colons}Serializer < ActiveModel::Serializer", "end"],
       \    "type": "serializer"
       \  },
+      \  "config/*.yml": {
+      \    "alternate": [
+      \      "config/{}.example.yml",
+      \      "config/{}.yml.example",
+      \      "config/{}.yml.sample"
+      \    ]
+      \  },
+      \  "config/*.example.yml": {"alternate": "config/{}.yml"},
+      \  "config/*.yml.example": {"alternate": "config/{}.yml"},
+      \  "config/*.yml.sample": {"alternate": "config/{}.yml"},
       \  "config/application.rb": {"alternate": "config/routes.rb"},
       \  "config/environment.rb": {"alternate": "config/routes.rb"},
       \  "config/environments/*.rb": {
@@ -4384,8 +4386,8 @@ let s:default_projections = {
       \    "alternate": ["config/application.rb", "config/environment.rb"],
       \    "type": "initializer"
       \  },
-      \  "gems.rb": {"alternate": "gems.locked", "type": "lib"},
       \  "gems.locked": {"alternate": "gems.rb"},
+      \  "gems.rb": {"alternate": "gems.locked", "type": "lib"},
       \  "lib/*.rb": {"type": "lib"},
       \  "lib/tasks/*.rake": {"type": "task"}
       \}

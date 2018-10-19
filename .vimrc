@@ -147,10 +147,10 @@ map f :Ack!
 "}}}
 
 "disable arrow keys
-"noremap <Up> <NOP>
-"noremap <Down> <NOP>
-"noremap <Left> <NOP>
-"noremap <Right> <NOP>
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
 
 
 "close the current buffer without closing window splits

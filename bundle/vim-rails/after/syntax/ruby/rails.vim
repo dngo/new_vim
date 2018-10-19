@@ -41,7 +41,7 @@ elseif s:path =~# '/app/models/.*\.rb$'
   syn keyword rubyCallback after_find after_initialize after_touch
   syn keyword rubyValidation validates validates_acceptance_of validates_associated validates_confirmation_of validates_each validates_exclusion_of validates_format_of validates_inclusion_of validates_length_of validates_numericality_of validates_presence_of validates_absence_of validates_size_of validates_with
   syn keyword rubyValidation validates_associated validates_uniqueness_of
-  syn keyword rubyMacro validate has_secure_password has_secure_token
+  syn keyword rubyMacro validate has_secure_password has_secure_token has_one_attached has_many_attached
 endif
 
 if s:path =~# '/app/jobs/.*\.rb$'
@@ -83,7 +83,7 @@ endif
 
 if s:path =~# '/app/controllers/.*\.rb$'
   syn keyword rubyHelper params request response session headers cookies flash
-  syn keyword rubyMacro protect_from_forgery
+  syn keyword rubyMacro protect_from_forgery skip_forgery_protection
   syn match   rubyMacro '\<respond_to\>\ze[( ] *[:*]'
   syn match   rubyResponse '\<respond_to\>\ze[( ] *\%([&{]\|do\>\)'
   syn keyword rubyResponse render head redirect_to redirect_back respond_with send_data send_file
