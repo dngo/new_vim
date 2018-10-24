@@ -83,6 +83,7 @@ set nobackup
 set noswapfile
 set nowritebackup
 set updatetime=10
+set hidden                      " Allow buffer change w/o saving
 
 colorscheme vividchalk
 set background=dark
@@ -176,3 +177,5 @@ nnoremap ; :
 " :%norm A ; "appends ; to the end of all lines
 " :%norm I , "prepends , to the end of all lines
 " i "opens in split while in nerdtree
+" shift - ] "jump to next empty line
+" ]m go to start of next method definition
