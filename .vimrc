@@ -163,7 +163,7 @@ map <C-\> :pop<CR>
 
 set pastetoggle=<F2> "press F2 to toggle between :set paste and :set nopaste
 set bs=2
-set selection=exclusive
+set selection=inclusive
 
 let NERDTreeShowBookmarks=1       " Show the bookmarks table on startup
 let NERDTreeShowFiles=1           " Show hidden files, too
@@ -184,3 +184,5 @@ nnoremap ; :
 " shift - ] "jump to next empty line
 " ]m go to start of next method definition
 " ctrl-] go to tag
+" ctrl-o return from gf
+" !<command> "executes shell command
