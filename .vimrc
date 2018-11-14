@@ -157,9 +157,8 @@ noremap <Right> <NOP>
 "close the current buffer without closing window splits
 map q :bp\|bd #<CR>
 
-"map <C-[> :pop<CR>
-"verbose nmap <C-]>
-"nnoremap <C-]> <C-]>
+"go back to previous ctag
+map <C-\> :pop<CR>
 
 
 set pastetoggle=<F2> "press F2 to toggle between :set paste and :set nopaste
