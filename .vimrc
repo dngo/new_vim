@@ -157,6 +157,11 @@ noremap <Right> <NOP>
 "close the current buffer without closing window splits
 map q :bp\|bd #<CR>
 
+"map <C-[> :pop<CR>
+"verbose nmap <C-]>
+"nnoremap <C-]> <C-]>
+
+
 set pastetoggle=<F2> "press F2 to toggle between :set paste and :set nopaste
 set bs=2
 set selection=exclusive
@@ -179,3 +184,4 @@ nnoremap ; :
 " i "opens in split while in nerdtree
 " shift - ] "jump to next empty line
 " ]m go to start of next method definition
+" ctrl-] go to tag
