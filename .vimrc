@@ -175,6 +175,12 @@ let NERDTreeMouseMode=2           " Use a single click to fold/unfold directorie
                                   " and a double click to open files
 
 
+let g:ctrlp_max_files=0
+let g:ctrlp_max_depth=40
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_root_markers = ['.git']
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:50,results:50'
+
 " strips off two full keystrokes from almost every Vim command since I dont have to press shift
 nnoremap ; :
 
