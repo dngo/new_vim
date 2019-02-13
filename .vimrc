@@ -125,6 +125,9 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>ss :call RunCurrentSpecFile()<CR>
 map f :Ack!
 
+"imap only applies while in insert mode
+imap ` <Esc>
+
 " Up/down/left/right {{{
  nnoremap h h|xnoremap h h|onoremap h h|
  nnoremap l k|xnoremap l k|onoremap l k|
@@ -193,3 +196,6 @@ nnoremap ; :
 " ctrl-] go to tag
 " ctrl-o return from gf
 " !<command> "executes shell command
+
+" vim-fugitive commands
+" Gblame, Gstatus, Gcommit
