@@ -104,6 +104,9 @@ set statusline=%m%F%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 "shortcut for find and replace
 map rr :%s///gc
 
+"for commenting out code
+map # :s/^/# /
+
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 map <TAB> :CtrlP<CR>
 
