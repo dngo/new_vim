@@ -106,6 +106,8 @@ map rr :%s///gc
 
 "for commenting out code
 map # :s/^/# /
+map , :s/$/,/
+
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 map <TAB> :CtrlP<CR>
@@ -129,7 +131,8 @@ map <Leader>ss :call RunCurrentSpecFile()<CR>
 map f :Ack!
 
 "imap only applies while in insert mode
-imap ` <Esc>
+"imap ` <Esc>
+inoremap ` <Esc>
 
 " Up/down/left/right {{{
  nnoremap h h|xnoremap h h|onoremap h h|
