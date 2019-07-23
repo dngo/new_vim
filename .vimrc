@@ -69,6 +69,7 @@ autocmd BufWritePre *.yml call TrimWhiteSpace()
 autocmd BufWritePre *.css call TrimWhiteSpace()
 autocmd BufWritePre *.slim call TrimWhiteSpace()
 autocmd BufWritePre *.js call TrimWhiteSpace()
+autocmd BufWritePre *.py call TrimWhiteSpace()
 autocmd CursorHold,CursorHoldI * update   "autosave
 
 let g:javascript_plugin_flow = 1
@@ -158,10 +159,10 @@ inoremap ` <Esc>
 "}}}
 
 "disable arrow keys
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+" noremap <Up> <NOP>
+" noremap <Down> <NOP>
+" noremap <Left> <NOP>
+" noremap <Right> <NOP>
 
 
 "close the current buffer without closing window splits
@@ -188,11 +189,14 @@ let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=40
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_root_markers = ['.git']
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:50,results:50'
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:100,results:100'
 
 " strips off two full keystrokes from almost every Vim command since I dont have to press shift
 nnoremap ; :
 
+" ctrlp Press <F5> to refresh the cache
+" Ctrl+Left MouseClick - Go to definition
+" Ctrl+Right MouseClick - Jump back from definition
 
 " :%norm A ; "appends ; to the end of all lines
 " :%norm I , "prepends , to the end of all lines
@@ -205,3 +209,7 @@ nnoremap ; :
 
 " vim-fugitive commands
 " Gblame, Gstatus, Gcommit
+
+"vim-surround
+" ds"  "removes surrounding quotes
+" ysiw" "add surrounding quotes
