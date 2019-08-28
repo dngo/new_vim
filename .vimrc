@@ -127,8 +127,8 @@ map <TAB><TAB> :NERDTreeToggle<CR>
   map <S-Right> :w\|bn<CR>
   map <S-e> :w\|bn<CR>
 
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>ss :call RunCurrentSpecFile()<CR>
+map <Leader>s :w<CR> :call RunNearestSpec()<CR>
+map <Leader>ss :w<CR> :call RunCurrentSpecFile()<CR>
 map f :Ack!
 
 "imap only applies while in insert mode
@@ -190,6 +190,9 @@ let g:ctrlp_max_depth=40
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_root_markers = ['.git']
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:100,results:100'
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|tmp|public))$'
+
+
 
 " strips off two full keystrokes from almost every Vim command since I dont have to press shift
 nnoremap ; :
