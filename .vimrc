@@ -19,7 +19,7 @@ Plugin 'VundleVim/Vundle.vim'
 "Plugin 'tpope/vim-surround'
 "Plugin 'tpope/vim-repeat'
 "Plugin 'tpope/vim-commentary'
-"Plugin 'thoughtbot/vim-rspec'
+Plugin 'thoughtbot/vim-rspec'
 "Plugin 'tpope/vim-dispatch'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'jelera/vim-javascript-syntax'
@@ -41,17 +41,25 @@ set autoread  " reload files when changed on disk, i.e. via `git checkout`
 set backspace=2 " fix broken backspace in some setups
 set mouse=a
 set hid
-set incsearch
+set incsearch "highlight matches as you type
+set hlsearch "highlight matches
 set sts=2
 set ignorecase  "case insensitive by default
+set smartcase   "but case-sensitive if expression contains a capital letter
 "set cursorline " highlight current line
 
 
 set ruler         " show the cursor position all the time
-set tabstop=2
-set shiftwidth=2
-set shiftround
+
+"tabs and indentation
 set expandtab
+set autoindent
+set smartindent
+
+"configure tabstyle
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 
 runtime! macros/matchit.vim
 
@@ -201,6 +209,7 @@ nnoremap ; :
 " Ctrl+Left MouseClick - Go to definition
 " Ctrl+Right MouseClick - Jump back from definition
 
+" :sort "alphabetically sorts line selected in visual mode
 " :%norm A ; "appends ; to the end of all lines
 " :%norm I , "prepends , to the end of all lines
 " i "opens in split while in nerdtree
