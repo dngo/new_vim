@@ -68,6 +68,12 @@ augroup myfiletypes
 	autocmd FileType ruby,eruby,yaml set ai sw=2 sts=2 et
 augroup END
 
+autocmd FileType eruby
+    \ if b:eruby_subtype ==# 'javascript'
+    \   set sw=2
+    \ endif
+
+
 au BufRead sup.*        set ft=mail
 
 autocmd BufNewFile,BufRead *.yml set ft=ruby fenc=utf-8
@@ -110,8 +116,9 @@ hi MBEVisibleChanged guibg=yellow ctermbg=yellow
 
 set statusline=%m%F%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 
-"shortcut for find and replace
-map rr :%s///gc
+"shortcut for find and replace word under cursor
+"map rr :%s///gc
+map rr :%s/\<<C-r><C-w>\>//gc<Left><Left>
 
 "for commenting out code
 map # :s/^/# /
@@ -176,10 +183,6 @@ inoremap ` <Esc>
 "close the current buffer without closing window splits
 map q :bp\|bd #<CR>
 
-"go back to previous ctag
-map <C-\> :pop<CR>
-
-
 set pastetoggle=<F2> "press F2 to toggle between :set paste and :set nopaste
 set bs=2
 set selection=inclusive
@@ -198,8 +201,16 @@ let g:ctrlp_max_depth=40
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_root_markers = ['.git']
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:100,results:100'
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|tmp|public))$'
 
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+
+"let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+let g:ctrlp_custom_ignore = {
+  \ 'dir': 'bin\|node_modules\|DS_Store\|git',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 
 
 " strips off two full keystrokes from almost every Vim command since I dont have to press shift
@@ -225,3 +236,4 @@ nnoremap ; :
 "vim-surround
 " ds"  "removes surrounding quotes
 " ysiw" "add surrounding quotes
+" :bufdo e "reloads all buffers
