@@ -6,6 +6,7 @@ set number
 "set the runtime path to include Vundle and initialize
 filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
+
 call vundle#begin()
 "alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -19,14 +20,16 @@ Plugin 'VundleVim/Vundle.vim'
 "Plugin 'tpope/vim-surround'
 "Plugin 'tpope/vim-repeat'
 "Plugin 'tpope/vim-commentary'
-Plugin 'thoughtbot/vim-rspec'
 "Plugin 'tpope/vim-dispatch'
+Plugin 'thoughtbot/vim-rspec'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'slim-template/vim-slim.git'
+Plugin 'christoomey/vim-sort-motion'
+Plugin 'christoomey/vim-system-copy'
 "Plugin 'kchmck/vim-coffee-script'
 "Plugin 'flazz/vim-colorschemes'
 "Plugin 'airblade/vim-gitgutter'
@@ -121,8 +124,7 @@ set statusline=%m%F%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 map rr :%s/\<<C-r><C-w>\>//gc<Left><Left>
 
 "for commenting out code
-map # :s/^/# /
-map , :s/$/,/
+"map # :s/^/# /
 
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
@@ -237,3 +239,10 @@ nnoremap ; :
 " ds"  "removes surrounding quotes
 " ysiw" "add surrounding quotes
 " :bufdo e "reloads all buffers
+
+"sort-motion
+"highlight text in visual mode, gs
+
+"system-copy
+"cP is mapped to copy the current line directly
+"cV is mapped to paste the content of system clipboard to the next line
