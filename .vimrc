@@ -101,7 +101,7 @@ endfunction
 set nobackup
 set noswapfile
 set nowritebackup
-set updatetime=10
+set updatetime=1000
 set hidden                      " Allow buffer change w/o saving
 
 colorscheme vividchalk
@@ -136,7 +136,7 @@ map <TAB><TAB> :NERDTreeToggle<CR>
 "redo latest changes to file
   map <S-U> :red<CR>
 
-"shift-h or shift-left saves file and goes to next buffer
+"shift-h or shift-left saves file and goes to previous buffer
   map <S-Left> :w\|bp<CR>
   map <S-h> :w\|bp<CR>
 
@@ -174,6 +174,11 @@ inoremap ` <Esc>
    nnoremap <C-Down> <c-w>j
    nnoremap <C-Right> <c-w>l
 "}}}
+"
+" go to top/bottom {{{
+ map <S-Up> gg
+ map <S-Down> <S-g>
+" }}}
 
 "disable arrow keys
 " noremap <Up> <NOP>
@@ -222,7 +227,6 @@ nnoremap ; :
 " Ctrl+Left MouseClick - Go to definition
 " Ctrl+Right MouseClick - Jump back from definition
 
-" :sort "alphabetically sorts line selected in visual mode
 " :%norm A ; "appends ; to the end of all lines
 " :%norm I , "prepends , to the end of all lines
 " i "opens in split while in nerdtree
@@ -238,6 +242,7 @@ nnoremap ; :
 "vim-surround
 " ds"  "removes surrounding quotes
 " ysiw" "add surrounding quotes
+
 " :bufdo e "reloads all buffers
 
 "sort-motion
