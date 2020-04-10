@@ -137,16 +137,16 @@ map <TAB><TAB> :NERDTreeToggle<CR>
   map <S-U> :red<CR>
 
 "shift-h or shift-left saves file and goes to previous buffer
-  map <S-Left> :w\|bp<CR>
-  map <S-h> :w\|bp<CR>
+  nnoremap <silent> <S-Left> :w\|bp<CR>
+  nnoremap <silent> <S-h> :w\|bp<CR>
 
 "shift-e or shift-right saves file and goes to next buffer
-  map <S-Right> :w\|bn<CR>
-  map <S-e> :w\|bn<CR>
+  nnoremap <silent>  <S-Right> :w\|bn<CR>
+  nnoremap <silent>  <S-e> :w\|bn<CR>
 
-map <Leader>s :w<CR> :call RunNearestSpec()<CR>
-map <Leader>ss :w<CR> :call RunCurrentSpecFile()<CR>
-map f :Ack!
+nnoremap <Leader>s :w<CR> :call RunNearestSpec()<CR>
+nnoremap <Leader>ss :w<CR> :call RunCurrentSpecFile()<CR>
+nnoremap f :Ack!
 
 "imap only applies while in insert mode
 "imap ` <Esc>
@@ -214,7 +214,7 @@ set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
 "let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 let g:ctrlp_custom_ignore = {
-  \ 'dir': 'bin\|node_modules\|DS_Store\|git',
+  \ 'dir': 'bin\|node_modules\|public\|log\|script\|git',
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
