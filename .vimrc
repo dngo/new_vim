@@ -21,7 +21,7 @@ Plugin 'VundleVim/Vundle.vim'
 "Plugin 'tpope/vim-repeat'
 "Plugin 'tpope/vim-commentary'
 "Plugin 'tpope/vim-dispatch'
-Plugin 'thoughtbot/vim-rspec'
+Plugin 'janko/vim-test'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
@@ -64,6 +64,9 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 
+"set textwidth=100
+"set colorcolumn=+1
+
 runtime! macros/matchit.vim
 
 augroup myfiletypes
@@ -101,7 +104,7 @@ endfunction
 set nobackup
 set noswapfile
 set nowritebackup
-set updatetime=1000
+set updatetime=500
 set hidden                      " Allow buffer change w/o saving
 
 colorscheme vividchalk
@@ -144,8 +147,11 @@ map <TAB><TAB> :NERDTreeToggle<CR>
   nnoremap <silent>  <S-Right> :w\|bn<CR>
   nnoremap <silent>  <S-e> :w\|bn<CR>
 
-nnoremap <Leader>s :w<CR> :call RunNearestSpec()<CR>
-nnoremap <Leader>ss :w<CR> :call RunCurrentSpecFile()<CR>
+"In a test file runs the test nearest to the cursor, otherwise runs the last nearest test.
+nmap <Leader>s :w<CR> :TestNearest<CR>
+" In a test file runs all tests in the current file, otherwise runs the last file tests.
+nmap <Leader>ss :w<CR> :TestFile<CR>
+
 nnoremap f :Ack!
 
 "imap only applies while in insert mode
