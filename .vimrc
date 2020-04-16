@@ -220,9 +220,9 @@ set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
 "let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 let g:ctrlp_custom_ignore = {
-  \ 'dir': 'bin\|node_modules\|public\|log\|script\|git',
+  \ 'dir': 'bin\|node_modules\|public\|log\|git',
   \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
+  \ 'link': 'javascript',
   \ }
 
 
