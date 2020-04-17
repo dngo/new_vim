@@ -127,7 +127,7 @@ set statusline=%m%F%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 map rr :%s/\<<C-r><C-w>\>//gc<Left><Left>
 
 "for commenting out code
-"map # :s/^/# /
+map # :s/^/# /
 
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
@@ -192,6 +192,10 @@ inoremap ` <Esc>
 " noremap <Left> <NOP>
 " noremap <Right> <NOP>
 
+" Alt-right/left to navigate forward/backward in the ctags stack
+map <M-Left> <C-T>
+map <M-Right> <C-]>
+
 
 "close the current buffer without closing window splits
 map q :bp\|bd #<CR>
@@ -230,16 +234,20 @@ let g:ctrlp_custom_ignore = {
 nnoremap ; :
 
 " ctrlp Press <F5> to refresh the cache
+
+" ctags
+" Alt-right go forward in ctags stack
+" Alt-left go backward in the ctags stack
 " Ctrl+Left MouseClick - Go to definition
 " Ctrl+Right MouseClick - Jump back from definition
+" ctrl-] go to tag
+" ctrl-o return from gf
 
 " :%norm A ; "appends ; to the end of all lines
 " :%norm I , "prepends , to the end of all lines
 " i "opens in split while in nerdtree
-" shift - ] "jump to next empty line
-" ]m go to start of next method definition
-" ctrl-] go to tag
-" ctrl-o return from gf
+" shift-[ "jump to prev empty line
+" shift-] "jump to next empty line
 " !<command> "executes shell command
 
 " vim-fugitive commands
