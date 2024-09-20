@@ -8,11 +8,6 @@ let maplocalleader=','
 let g:javascript_plugin_jsdoc = 1
 
 
-"let g:ycm_python_binary_path = '/usr/local/bin/python3'
-
-"set the runtime path to include Vundle and initialize
-filetype off                  " required
-=======
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
@@ -21,20 +16,15 @@ Plugin 'tpope/vim-rails'
 Plugin 'ctrlpvim/ctrlp.vim'
 "Plugin 'tpope/vim-dispatch'
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'vim-airline/vim-airline'
 Plugin 'janko/vim-test'
 Plugin 'jlanzarotta/bufexplorer'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'preservim/nerdtree'
 Plugin 'slim-template/vim-slim.git'
 Plugin 'christoomey/vim-sort-motion'
 Plugin 'christoomey/vim-system-copy'
 "Plugin 'kchmck/vim-coffee-script'
 "Plugin 'flazz/vim-colorschemes'
-Plugin 'airblade/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'airblade/vim-gitgutter'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
@@ -42,6 +32,7 @@ call plug#begin()
 " List your plugins here
 Plug 'preservim/nerdtree'
 Plug 'pangloss/vim-javascript'
+Plug 'neoclide/coc.nvim'
 call plug#end()
 
 execute pathogen#infect()
@@ -146,7 +137,7 @@ map # :s/^/# /
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 map <TAB> :CtrlP<CR>
-map ~ <ESC> 
+
 "open up nerd tree when pressing tab twice
 map <TAB><TAB> :NERDTreeToggle<CR>
 
@@ -218,7 +209,6 @@ set pastetoggle=<F2> "press F2 to toggle between :set paste and :set nopaste
 set bs=2
 set selection=inclusive
 
-let NERDTreeWinSize=60
 let NERDTreeShowBookmarks=1       " Show the bookmarks table on startup
 let NERDTreeShowFiles=1           " Show hidden files, too
 let NERDTreeShowHidden=1
