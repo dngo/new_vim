@@ -1,28 +1,26 @@
+set encoding=utf-8
+set number
+set nocompatible
+filetype off                  " required
+
 let mapleader = " "
 let maplocalleader=','
-set nocompatible
-set number
+let g:javascript_plugin_jsdoc = 1
+
 
 "let g:ycm_python_binary_path = '/usr/local/bin/python3'
 
 "set the runtime path to include Vundle and initialize
 filetype off                  " required
+=======
 set rtp+=~/.vim/bundle/Vundle.vim
-
 call vundle#begin()
-"alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" The following are examples of different formats supported.
-"Plugin 'tpope/vim-rails'
-"Plugin 'ctrlpvim/ctrlp.vim'
-"Plugin 'tpope/vim-surround'
-"Plugin 'tpope/vim-repeat'
-"Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-rails'
+Plugin 'ctrlpvim/ctrlp.vim'
 "Plugin 'tpope/vim-dispatch'
+Plugin 'vim-ruby/vim-ruby'
 Plugin 'janko/vim-test'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'jelera/vim-javascript-syntax'
@@ -40,6 +38,11 @@ Plugin 'Valloric/YouCompleteMe'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
+call plug#begin()
+" List your plugins here
+Plug 'preservim/nerdtree'
+Plug 'pangloss/vim-javascript'
+call plug#end()
 
 execute pathogen#infect()
 syntax on
@@ -54,6 +57,9 @@ set sts=2
 set ignorecase  "case insensitive by default
 set smartcase   "but case-sensitive if expression contains a capital letter
 "set cursorline " highlight current line
+"
+let g:NERDTreeFileExtensionHighlightFullName = 1
+
 
 
 set ruler         " show the cursor position all the time
@@ -108,8 +114,12 @@ endfunction
 set nobackup
 set noswapfile
 set nowritebackup
-set updatetime=500
+set updatetime=250 "autosave current file every 500ms
 set hidden                      " Allow buffer change w/o saving
+
+:au FocusLost * silent! wa "autosave buffer when focus lost
+:set autowrite "autosave buffer on switch
+
 
 colorscheme vividchalk
 set background=dark
@@ -128,7 +138,7 @@ set statusline=%m%F%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 
 "shortcut for find and replace word under cursor
 "map rr :%s///gc
-map rr :%s/\<<C-r><C-w>\>//gc<Left><Left>
+map rr :%s/\<<C-r><C-w>\>/<C-r><C-w>/gc<Left><Left>
 
 "for commenting out code
 map # :s/^/# /
@@ -160,7 +170,7 @@ nnoremap f :Ack!
 
 "imap only applies while in insert mode
 "imap ` <Esc>
-inoremap ` <Esc>
+"inoremap ` <Esc>
 
 " Up/down/left/right {{{
  nnoremap h h|xnoremap h h|onoremap h h|
@@ -268,5 +278,5 @@ nnoremap ; :
 "highlight text in visual mode, gs
 
 "system-copy
-"cP is mapped to copy the current line directly
-"cV is mapped to paste the content of system clipboard to the next line
+"cp is mapped to copy the highlighted contents to cliboard
+"cv is mapped to paste the content of system clipboard to the next line

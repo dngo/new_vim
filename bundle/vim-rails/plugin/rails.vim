@@ -4,10 +4,15 @@
 
 " Install this file as plugin/rails.vim.
 
-if exists('g:loaded_rails') || &cp || v:version < 700
+if exists('g:loaded_rails') || &cp || v:version < 800
   finish
 endif
 let g:loaded_rails = 1
+
+" Turn on $LOAD_PATH detection in the ruby ftplugin
+if !exists('g:ruby_exec')
+  let g:ruby_exec = 1
+endif
 
 " Utility Functions {{{1
 
@@ -18,6 +23,11 @@ function! s:error(str)
   let v:errmsg = a:str
 endfunction
 
+let s:slash = exists('+shellslash') ? '\' : '/'
+function! s:IsAbs(path) abort
+  return tr(a:path, s:slash, '/') =~# '^/\|^\a\+:'
+endfunction
+
 " }}}1
 " Detection {{{1
 
@@ -25,25 +35,38 @@ function! RailsDetect(...) abort
   if exists('b:rails_root')
     return 1
   endif
-  let fn = fnamemodify(a:0 ? a:1 : expand('%'), ':p')
-  let ns = matchstr(fn, '^\a\a\+\ze:')
-  if len(ns) && exists('*' . ns . '#filereadable') && exists('*' . ns . '#isdirectory') && !get(g:, 'projectionist_ignore_' . ns)
-    let fn = substitute(fn, '[^:\/#]*$', '', '')
-    while fn =~# '^\a\a\+:.'
-      if {ns}#filereadable(fn . 'config/environment.rb') && {ns}#isdirectory(fn . 'app')
-        let b:rails_root = substitute(fn, '[:\/#]$', '', '')
+  if a:0
+    let path = a:1
+  elseif &l:buftype =~# '^\%(nowrite\)\=$' && len(@%) || &l:buftype =~# '^\%(nofile\|acwrite\)' && s:IsAbs(@%)
+    let path = @%
+  else
+    return
+  endif
+  if !s:IsAbs(path)
+    let s = exists('+shellslash') && !&shellslash ? '\' : '/'
+    let path = substitute(getcwd(), '\' . s . '\=$', s, '') . path
+  endif
+  let path = substitute(path, '[' . s:slash . '/]$', '', '')
+  try
+    if exists('*ExcludeBufferFromDiscovery') && ExcludeBufferFromDiscovery(file, 'projectionist')
+      return
+    endif
+  catch
+  endtry
+
+  if exists('*ProjectionistHas')
+    let previous = ''
+    while path !=# previous && path !~# '^\.\=$\|^[\/][\/][^\/]*$'
+      if ProjectionistHas('config/environment.rb&app/', path)
+        let b:rails_root = path
         return 1
       endif
-      let fn = substitute(fn, '[^:\/#]*[:\/#][^:\/#]*$', '', '')
+      let previous = path
+      let path = fnamemodify(path, ':h')
     endwhile
     return 0
-  elseif len(ns) || fn =~# ':[\/]\{2\}'
-    return 0
   endif
-  if !isdirectory(fn)
-    let fn = fnamemodify(fn, ':h')
-  endif
-  let file = findfile('config/environment.rb', escape(fn, ', ').';')
+  let file = findfile('config/environment.rb', escape(path, ', ').';')
   if !empty(file) && isdirectory(fnamemodify(file, ':p:h:h') . '/app')
     let b:rails_root = fnamemodify(file, ':p:h:h')
     return 1
@@ -68,41 +91,31 @@ if !exists('g:loaded_projectionist')
   runtime! plugin/projectionist.vim
 endif
 
-function! s:doau_user(arg) abort
-  if exists('#User#'.a:arg)
-    try
-      let [modelines, &modelines] = [&modelines, 0]
-      exe 'doautocmd User' a:arg
-    finally
-      let &modelines = modelines
-    endtry
-  endif
-endfunction
-
 augroup railsPluginDetect
   autocmd!
 
   autocmd BufNewFile,BufReadPost *
-        \ if RailsDetect(expand("<afile>:p")) && empty(&filetype) |
+        \ if RailsDetect() && empty(&filetype) |
         \   call rails#buffer_setup() |
         \ endif
   autocmd VimEnter *
-        \ if empty(expand("<amatch>")) && RailsDetect(getcwd()) |
+        \ if get(g:, 'rails_vim_enter', get(g:, 'projectionist_vim_enter', 1)) &&
+        \     argc() == 0 && RailsDetect(getcwd()) |
         \   call rails#buffer_setup() |
-        \   call s:doau_user('BufEnterRails') |
         \ endif
   autocmd FileType netrw
-        \ if RailsDetect() |
-        \   call s:doau_user('BufEnterRails') |
+        \ if RailsDetect(get(b:, 'netrw_curdir', @%)) |
         \ endif
   autocmd FileType * if RailsDetect() | call rails#buffer_setup() | endif
 
-  autocmd BufNewFile,BufReadPost *.yml,*.yml.example,*.yml.sample
+  autocmd BufNewFile,BufReadPost */config/*.yml{,.example,.sample},*/{test,spec}/fixtures/*.yml
         \ if &filetype !=# 'eruby.yaml' && RailsDetect() |
         \   set filetype=eruby.yaml |
         \ endif
   autocmd BufNewFile,BufReadPost *.rjs,*.rxml,*.builder,*.jbuilder,*.ruby
         \ if &filetype !=# 'ruby' | set filetype=ruby | endif
+  autocmd BufNewFile,BufReadPost *.turbo_stream.erb
+        \ if &filetype !=# 'eruby.html' | set filetype=eruby.html | endif
   autocmd BufReadPost *.log if RailsDetect() | set filetype=railslog | endif
 
   autocmd FileType qf call s:LogDetect()
@@ -114,7 +127,7 @@ augroup railsPluginDetect
         \ endif
 augroup END
 
-command! -bang -bar -nargs=* -count -complete=customlist,rails#complete_rails Rails execute rails#command(<bang>0, '<mods>', !<count> && <line1> ? -1 : <count>, <q-args>)
+command! -bang -bar -nargs=* -range=-1 -complete=customlist,rails#complete_rails Rails execute rails#command(<bang>0, '<mods>', <count>, <q-args>)
 
 " }}}1
 " dadbod.vim support {{{1
@@ -130,10 +143,6 @@ let g:db_adapter_rails = 'rails#db_'
 " }}}1
 " abolish.vim support {{{1
 
-function! s:function(name)
-    return function(substitute(a:name,'^s:',matchstr(expand('<sfile>'), '<SNR>\d\+_'),''))
-endfunction
-
 augroup railsPluginAbolish
   autocmd!
   autocmd VimEnter * call s:abolish_setup()
@@ -142,10 +151,10 @@ augroup END
 function! s:abolish_setup()
   if exists('g:Abolish') && has_key(g:Abolish,'Coercions')
     if !has_key(g:Abolish.Coercions,'l')
-      let g:Abolish.Coercions.l = s:function('s:abolish_l')
+      let g:Abolish.Coercions.l = function('s:abolish_l')
     endif
-    if !has_key(g:Abolish.Coercions,'t')
-      let g:Abolish.Coercions.t = s:function('s:abolish_t')
+    if !has_key(g:Abolish.Coercions,'t') || string(g:Abolish.Coercions.t) =~# "'<SNR>[0-9]*_titlecase'"
+      let g:Abolish.Coercions.t = function('s:abolish_t')
     endif
   endif
 endfunction
