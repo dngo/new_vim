@@ -11,6 +11,8 @@ let g:javascript_plugin_jsdoc = 1
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'mileszs/ack.vim'
+
 
 Plugin 'tpope/vim-rails'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -94,6 +96,18 @@ autocmd BufWritePre *.py call TrimWhiteSpace()
 autocmd CursorHold,CursorHoldI * update   "autosave
 
 let g:javascript_plugin_flow = 1
+
+" use <tab> to trigger completion and navigate to the next complete item
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Removes trailing spaces
 function TrimWhiteSpace()
