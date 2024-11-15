@@ -15,6 +15,7 @@ Plugin 'mileszs/ack.vim'
 
 
 Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-fugitive'
 Plugin 'ctrlpvim/ctrlp.vim'
 "Plugin 'tpope/vim-dispatch'
 Plugin 'vim-ruby/vim-ruby'
@@ -268,9 +269,6 @@ nnoremap ; :
 " shift-[ "jump to prev empty line
 " shift-] "jump to next empty line
 " !<command> "executes shell command
-
-" vim-fugitive commands
-" Gblame, Gstatus, Gcommit
 
 "vim-surround
 " ds"  "removes surrounding quotes
